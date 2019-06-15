@@ -459,7 +459,7 @@ public class ImporterOptions extends OptionsList {
   public void setZBegin(int s, int value) { set(zBegin, s, value, 0); }
   public int getZEnd(int s) { return get(zEnd, s, -1); }
   public void setZEnd(int s, int value) { set(zEnd, s, value, -1); }
-  public floatt getZStep(int s) { return get(zStep, s, (float)1); }  //BMM
+  public float getZStep(int s) { return get(zStep, s, (float)1); }  //BMM
   public void setZStep(int s, float value) { //BMM
     if (value <= 0) {
       throw new IllegalArgumentException("Invalid Z step: " + value);
@@ -471,7 +471,7 @@ public class ImporterOptions extends OptionsList {
   public void setTBegin(int s, int value) { set(tBegin, s, value, 0); }
   public int getTEnd(int s) { return get(tEnd, s, -1); }
   public void setTEnd(int s, int value) { set(tEnd, s, value, -1); }
-  public floatt getTStep(int s) { return get(tStep, s, (float)1); } //BMM
+  public float getTStep(int s) { return get(tStep, s, (float)1); } //BMM
   public void setTStep(int s, float value) { //BMM
     if (value <= 0) {
       throw new IllegalArgumentException("Invalid T step: " + value);

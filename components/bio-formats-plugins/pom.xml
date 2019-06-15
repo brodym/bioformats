@@ -113,17 +113,7 @@
           </systemPropertyVariables>
         </configuration>
       </plugin>
-      <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>loci.plugins.About</mainClass>
-              <packageName>loci.plugins</packageName>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
+
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>license-maven-plugin</artifactId>
