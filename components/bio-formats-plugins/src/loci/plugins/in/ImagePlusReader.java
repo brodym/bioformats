@@ -528,17 +528,17 @@ public class ImagePlusReader implements StatusReporter {
     final boolean[] load = new boolean[reader.getImageCount()];
     final int cBegin = process.getCBegin(s);
     final int cEnd = process.getCEnd(s);
-    final int cStep = process.getCStep(s);
+    final float cStep = process.getCStep(s); //BMM
     final int zBegin = process.getZBegin(s);
     final int zEnd = process.getZEnd(s);
-    final int zStep = process.getZStep(s);
+    final float zStep = process.getZStep(s); //BMM
     final int tBegin = process.getTBegin(s);
     final int tEnd = process.getTEnd(s);
-    final int tStep = process.getTStep(s);
-    for (int c=cBegin; c<=cEnd; c+=cStep) {
-      for (int z=zBegin; z<=zEnd; z+=zStep) {
-        for (int t=tBegin; t<=tEnd; t+=tStep) {
-          int index = reader.getIndex(z, c, t);
+    final float tStep = process.getTStep(s); //BMM
+    for (float c=cBegin; Math.round(c)<=cEnd; c+=cStep) { //BMM
+      for (float z=zBegin; Math.round(z)<=zEnd; z+=zStep) { //BMM
+        for (float t=tBegin; Math.round(t)<=tEnd; t+=tStep) { //BMM
+          int index = reader.getIndex(Math.round(z), Math.round(c), Math.round(t)); //BMM
           load[index] = true;
         }
       }

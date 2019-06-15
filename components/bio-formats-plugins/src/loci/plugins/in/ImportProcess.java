@@ -346,7 +346,7 @@ public class ImportProcess implements StatusReporter {
     reader.setSeries(s);
     return reader.getEffectiveSizeC() - 1;
   }
-  public int getCStep(int s) { return options.getCStep(s); }
+  public float getCStep(int s) { return options.getCStep(s); } //BMM
 
   public int getZBegin(int s) { return options.getZBegin(s); }
   /** Valid only after {@link ImportStep#STACK}. */
@@ -357,7 +357,7 @@ public class ImportProcess implements StatusReporter {
     reader.setSeries(s);
     return reader.getSizeZ() - 1;
   }
-  public int getZStep(int s) { return options.getZStep(s); }
+  public float getZStep(int s) { return options.getZStep(s); } //BMM
 
   public int getTBegin(int s) { return options.getTBegin(s); }
   /** Valid only after {@link ImportStep#STACK}. */
@@ -368,7 +368,7 @@ public class ImportProcess implements StatusReporter {
     reader.setSeries(s);
     return reader.getSizeT() - 1;
   }
-  public int getTStep(int s) { return options.getTStep(s); }
+  public float getTStep(int s) { return options.getTStep(s); } //BMM
 
   // crop options
   /** Valid only after {@link ImportStep#STACK}. */
@@ -401,19 +401,19 @@ public class ImportProcess implements StatusReporter {
   public int getCCount(int s) {
     assertStep(ImportStep.SERIES);
     if (!options.isSeriesOn(s)) return 0;
-    return (getCEnd(s) - getCBegin(s) + getCStep(s)) / getCStep(s);
+    return Math.round((getCEnd(s) - getCBegin(s) + getCStep(s)) / getCStep(s)); //BMM
   }
   /** Valid only after {@link ImportStep#SERIES}. */
   public int getZCount(int s) {
     assertStep(ImportStep.SERIES);
     if (!options.isSeriesOn(s)) return 0;
-    return (getZEnd(s) - getZBegin(s) + getZStep(s)) / getZStep(s);
+    return Math.round((getZEnd(s) - getZBegin(s) + getZStep(s)) / getZStep(s)); //BMM
   }
   /** Valid only after {@link ImportStep#SERIES}. */
   public int getTCount(int s) {
     assertStep(ImportStep.SERIES);
     if (!options.isSeriesOn(s)) return 0;
-    return (getTEnd(s) - getTBegin(s) + getTStep(s)) / getTStep(s);
+    return Math.round((getTEnd(s) - getTBegin(s) + getTStep(s)) / getTStep(s)); //BMM
   }
 
   /**

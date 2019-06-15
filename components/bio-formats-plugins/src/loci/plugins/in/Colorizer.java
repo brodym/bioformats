@@ -242,9 +242,9 @@ public class Colorizer {
       // extract display ranges for autoscaling
       final MinMaxCalculator minMaxCalc = process.getMinMaxCalculator();
       final int cBegin = process.getCBegin(series);
-      final int cStep = process.getCStep(series);
+      final float cStep = process.getCStep(series); //BMM
       for (int c=0; c<cSize; c++) {
-        final int cIndex = cBegin + c * cStep;
+        final int cIndex = Math.round(cBegin + c * cStep); //BMM
         Double cMinVal = null, cMaxVal = null;
         try {
           cMinVal = minMaxCalc.getChannelGlobalMinimum(cIndex);

@@ -139,13 +139,13 @@ public class ImporterOptions extends OptionsList {
   // range options
   private List<Integer> cBegin = new ArrayList<Integer>();
   private List<Integer> cEnd = new ArrayList<Integer>();
-  private List<Integer> cStep = new ArrayList<Integer>();
+  private List<Float> cStep = new ArrayList<Float>(); //BMM
   private List<Integer> zBegin = new ArrayList<Integer>();
   private List<Integer> zEnd = new ArrayList<Integer>();
-  private List<Integer> zStep = new ArrayList<Integer>();
+  private List<Float> zStep = new ArrayList<Float>(); //BMM
   private List<Integer> tBegin = new ArrayList<Integer>();
   private List<Integer> tEnd = new ArrayList<Integer>();
-  private List<Integer> tStep = new ArrayList<Integer>();
+  private List<Float> tStep = new ArrayList<Float>(); //BMM
 
   // crop options
   private List<Region> cropRegion = new ArrayList<Region>();
@@ -177,6 +177,12 @@ public class ImporterOptions extends OptionsList {
   /** Parses the plugin argument for parameter values. */
   public void parseArg(String arg) {
     if (arg == null || arg.length() == 0) return;
+        //BMM add other arguments to be understood:
+        setSplitChannels(arg.contains("splitWindows=true"));
+        setSpecifyRanges(arg.contains("specifyRanges=true"));
+        setVirtual(arg.contains("virtual=true"));
+        if (arg.contains("stackFormat=Hyperstack") )
+        	setStackFormat(VIEW_HYPERSTACK);
     if (new Location(arg).exists()) {
       // old style arg: entire argument is a file path
 
@@ -441,36 +447,36 @@ public class ImporterOptions extends OptionsList {
   public void setCBegin(int s, int value) { set(cBegin, s, value, 0); }
   public int getCEnd(int s) { return get(cEnd, s, -1); }
   public void setCEnd(int s, int value) { set(cEnd, s, value, -1); }
-  public int getCStep(int s) { return get(cStep, s, 1); }
-  public void setCStep(int s, int value) {
+  public float getCStep(int s) { return get(cStep, s, (float)1); } //BMM
+  public void setCStep(int s, float value) { //BMM
     if (value <= 0) {
       throw new IllegalArgumentException("Invalid C step: " + value);
     }
-    set(cStep, s, value, 1);
+    set(cStep, s, value, (float)1); //BMM
   }
 
   public int getZBegin(int s) { return get(zBegin, s, 0); }
   public void setZBegin(int s, int value) { set(zBegin, s, value, 0); }
   public int getZEnd(int s) { return get(zEnd, s, -1); }
   public void setZEnd(int s, int value) { set(zEnd, s, value, -1); }
-  public int getZStep(int s) { return get(zStep, s, 1); }
-  public void setZStep(int s, int value) {
+  public floatt getZStep(int s) { return get(zStep, s, (float)1); }  //BMM
+  public void setZStep(int s, float value) { //BMM
     if (value <= 0) {
       throw new IllegalArgumentException("Invalid Z step: " + value);
     }
-    set(zStep, s, value, 1);
+    set(zStep, s, value, (float)1); //BMM
   }
 
   public int getTBegin(int s) { return get(tBegin, s, 0); }
   public void setTBegin(int s, int value) { set(tBegin, s, value, 0); }
   public int getTEnd(int s) { return get(tEnd, s, -1); }
   public void setTEnd(int s, int value) { set(tEnd, s, value, -1); }
-  public int getTStep(int s) { return get(tStep, s, 1); }
-  public void setTStep(int s, int value) {
+  public floatt getTStep(int s) { return get(tStep, s, (float)1); } //BMM
+  public void setTStep(int s, float value) { //BMM
     if (value <= 0) {
       throw new IllegalArgumentException("Invalid T step: " + value);
     }
-    set(tStep, s, value, 1);
+    set(tStep, s, value, (float)1);
   }
 
   // crop options

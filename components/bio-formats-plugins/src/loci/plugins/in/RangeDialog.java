@@ -52,7 +52,7 @@ public class RangeDialog extends ImporterDialog {
 
   @Override
   protected boolean needPrompt() {
-    if (process.isWindowless() || !options.isSpecifyRanges()) return false;
+    if (!options.isSpecifyRanges()) return false;
 
     ImageProcessorReader r = process.getReader();
     int seriesCount = process.getSeriesCount();
@@ -87,9 +87,9 @@ public class RangeDialog extends ImporterDialog {
         gd.addNumericField("C_Step" + suffix, process.getCStep(s), 0);
       }
       if (r.getSizeZ() > 1) {
-        gd.addNumericField("Z_Begin" + suffix, process.getZBegin(s) + 1, 0);
-        gd.addNumericField("Z_End" + suffix, process.getZEnd(s) + 1, 0);
-        gd.addNumericField("Z_Step" + suffix, process.getZStep(s), 0);
+        gd.addNumericField("First Frame" + suffix, process.getZBegin(s) + 1, 0);
+        gd.addNumericField("Last Frame" + suffix, process.getZEnd(s) + 1, 0);
+        gd.addNumericField("Frame Increment" + suffix, process.getZStep(s), 0);
       }
       if (r.getSizeT() > 1) {
         gd.addNumericField("T_Begin" + suffix, process.getTBegin(s) + 1, 0);
@@ -123,29 +123,29 @@ public class RangeDialog extends ImporterDialog {
 
       int cBegin = process.getCBegin(s);
       int cEnd = process.getCEnd(s);
-      int cStep = process.getCStep(s);
+      float cStep = process.getCStep(s); //BMM - treat the steps as floats
       int zBegin = process.getZBegin(s);
       int zEnd = process.getZEnd(s);
-      int zStep = process.getZStep(s);
+      float zStep = process.getZStep(s);  //BMM
       int tBegin = process.getTBegin(s);
       int tEnd = process.getTEnd(s);
-      int tStep = process.getTStep(s);
+      float tStep = process.getTStep(s); //BMM
 
       //if (certain) {
       if (r.getEffectiveSizeC() > 1) {
         cBegin = (int) gd.getNextNumber() - 1;
         cEnd = (int) gd.getNextNumber() - 1;
-        cStep = (int) gd.getNextNumber();
+        cStep = (float) gd.getNextNumber(); //BMM
       }
       if (r.getSizeZ() > 1) {
         zBegin = (int) gd.getNextNumber() - 1;
         zEnd = (int) gd.getNextNumber() - 1;
-        zStep = (int) gd.getNextNumber();
+        zStep = (float) gd.getNextNumber(); //BMM
       }
       if (r.getSizeT() > 1) {
         tBegin = (int) gd.getNextNumber() - 1;
         tEnd = (int) gd.getNextNumber() - 1;
-        tStep = (int) gd.getNextNumber();
+        tStep = (float) gd.getNextNumber(); //BMM
       }
       //}
       //else {
