@@ -67,14 +67,14 @@ public class Calibrator {
     double zcal = Double.NaN, tcal = Double.NaN;
 
     Length xd = meta.getPixelsPhysicalSizeX(series);
-    if (xd != null && xd.unit().isConvertible(UNITS.MICROMETER))
-        xcal = xd.value(UNITS.MICROMETER).doubleValue();
+    if (xd != null && xd.unit().isConvertible(UNITS.MILLIMETER))
+        xcal = xd.value(UNITS.MILLIMETER).doubleValue();
     Length yd = meta.getPixelsPhysicalSizeY(series);
-    if (yd != null && yd.unit().isConvertible(UNITS.MICROMETER))
-        ycal = yd.value(UNITS.MICROMETER).doubleValue();
+    if (yd != null && yd.unit().isConvertible(UNITS.MILLIMETER))
+        ycal = yd.value(UNITS.MILLIMETER).doubleValue();
     Length zd = meta.getPixelsPhysicalSizeZ(series);
-    if (zd != null && zd.unit().isConvertible(UNITS.MICROMETER))
-        zcal = zd.value(UNITS.MICROMETER).doubleValue();
+    if (zd != null && zd.unit().isConvertible(UNITS.MILLIMETER))
+        zcal = zd.value(UNITS.MILLIMETER).doubleValue();
     Time td = meta.getPixelsTimeIncrement(series);
     if (td != null) tcal = td.value(UNITS.SECOND).doubleValue();
 
@@ -102,7 +102,7 @@ public class Calibrator {
     if (hasCalibration) {
       // set calibration only if at least one value is present
       Calibration cal = new Calibration();
-      if (hasSpatial) cal.setUnit("micron");
+      if (hasSpatial) cal.setUnit("mm");
       if (xcalPresent) cal.pixelWidth = xcal == 0 ? 1 : xcal;
       if (ycalPresent) cal.pixelHeight = ycal == 0 ? 1 : ycal;
       if (zcalPresent) cal.pixelDepth = zcal == 0 ? 1 : zcal;

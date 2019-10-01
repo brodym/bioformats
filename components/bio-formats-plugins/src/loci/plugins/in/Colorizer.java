@@ -162,6 +162,7 @@ public class Colorizer {
       final boolean doComposite = !options.isViewStandard() &&
         mode != -1 && cSize > 1 && cSize <= 7;
       if (doComposite) {
+    	  ///BMM this is where my logic needs to be added.
         final ImagePlus toClose = imp;
         CompositeImage compImage = new CompositeImage(imp, mode) {
           @Override
@@ -194,7 +195,11 @@ public class Colorizer {
         };
         compImage.setProperty(ImagePlusReader.PROP_SERIES, series);
         if (luts != null) compImage.setLuts(luts);
+        if (options.getFlattenMode()) {
+        	compImage.flattenStack();
+        }
         imps.set(i, compImage);
+        
         imp = compImage;
       }
       else {
@@ -213,6 +218,7 @@ public class Colorizer {
       }
 
       applyDisplayRanges(imp, series);
+
     }
     return imps;
   }

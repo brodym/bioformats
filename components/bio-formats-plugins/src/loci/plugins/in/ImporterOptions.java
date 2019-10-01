@@ -130,6 +130,12 @@ public class ImporterOptions extends OptionsList {
 
   // -- Fields -- secondary values --
 
+  // mergeChannels
+  private boolean mergeChannels = false;
+  
+  // Flatten Composite to RGB - //BMM
+  private boolean flatten = false;
+  
   // series options
   private List<Boolean> seriesOn = new ArrayList<Boolean>();
 
@@ -183,6 +189,10 @@ public class ImporterOptions extends OptionsList {
         setVirtual(arg.contains("virtual=true"));
         if (arg.contains("stackFormat=Hyperstack") )
         	setStackFormat(VIEW_HYPERSTACK);
+      	mergeChannels = arg.contains("mergeChannels=true");
+      	flatten = arg.contains("flatten=true");
+      	setColorMode(COLOR_MODE_DEFAULT);
+        
     if (new Location(arg).exists()) {
       // old style arg: entire argument is a file path
 
@@ -228,11 +238,12 @@ public class ImporterOptions extends OptionsList {
     //}
 
     // check obsolete color options
-    final boolean mergeChannels = checkKey(macroOptions, "merge_channels");
+    //final boolean mergeChannels = checkKey(macroOptions, "merge_channels");
     final boolean rgbColorize = checkKey(macroOptions, "rgb_colorize");
     final boolean customColorize = checkKey(macroOptions, "custom_colorize");
-    if (mergeChannels) setColorMode(COLOR_MODE_COMPOSITE);
-    else if (rgbColorize) setColorMode(COLOR_MODE_COLORIZED);
+    //if (mergeChannels) setColorMode(COLOR_MODE_COMPOSITE);
+    //else 
+    if (rgbColorize) setColorMode(COLOR_MODE_COLORIZED);
     else if (customColorize) setColorMode(COLOR_MODE_CUSTOM);
   }
 
@@ -263,11 +274,15 @@ public class ImporterOptions extends OptionsList {
     return COLOR_MODE_CUSTOM.equals(getColorMode());
   }
   public void setColorMode(String s) { setValue(KEY_COLOR_MODE, s); }
+  public boolean getFlattenMode() { return flatten; }
 
   // concatenate
   public String getConcatenateInfo() { return getInfo(KEY_CONCATENATE); }
   public boolean isConcatenate() { return isSet(KEY_CONCATENATE); }
   public void setConcatenate(boolean b) { setValue(KEY_CONCATENATE, b); }
+  
+  // mergeChannels
+  public boolean getMergeChannels() { return mergeChannels; }
 
   // crop
   public String getCropInfo() { return getInfo(KEY_CROP); }

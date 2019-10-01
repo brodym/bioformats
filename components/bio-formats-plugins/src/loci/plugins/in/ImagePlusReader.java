@@ -337,7 +337,7 @@ public class ImagePlusReader implements StatusReporter {
 
     // CTR FIXME: Make virtual stack work with different color modes?
     final BFVirtualStack virtualStack = new BFVirtualStack(options.getId(),
-      reader, false, false, false);
+      reader, false, options.getMergeChannels(), false);
     for (int i=0; i<imageCount; i++) {
       String label = constructSliceLabel(i, reader, meta, s, zCount, cCount, tCount);
       virtualStack.addSlice(label);

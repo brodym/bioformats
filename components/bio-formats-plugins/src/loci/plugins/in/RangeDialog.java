@@ -81,11 +81,12 @@ public class RangeDialog extends ImporterDialog {
       gd.addMessage(process.getSeriesLabel(s).replaceAll("_", " "));
       String suffix = seriesCount > 1 ? "_" + (s + 1) : "";
       //if (r.isOrderCertain()) {
-      if (r.getEffectiveSizeC() > 1) {
-        gd.addNumericField("C_Begin" + suffix, process.getCBegin(s) + 1, 0);
-        gd.addNumericField("C_End" + suffix, process.getCEnd(s) + 1, 0);
-        gd.addNumericField("C_Step" + suffix, process.getCStep(s), 0);
-      }
+      //BMM
+      //if (r.getEffectiveSizeC() > 1) {
+      //  gd.addNumericField("C_Begin" + suffix, process.getCBegin(s) + 1, 0);
+      //  gd.addNumericField("C_End" + suffix, process.getCEnd(s) + 1, 0);
+      //  gd.addNumericField("C_Step" + suffix, process.getCStep(s), 0);
+      //}
       if (r.getSizeZ() > 1) {
         gd.addNumericField("First Frame" + suffix, process.getZBegin(s) + 1, 0);
         gd.addNumericField("Last Frame" + suffix, process.getZEnd(s) + 1, 0);
@@ -132,11 +133,12 @@ public class RangeDialog extends ImporterDialog {
       float tStep = process.getTStep(s); //BMM
 
       //if (certain) {
-      if (r.getEffectiveSizeC() > 1) {
-        cBegin = (int) gd.getNextNumber() - 1;
-        cEnd = (int) gd.getNextNumber() - 1;
-        cStep = (float) gd.getNextNumber(); //BMM
-      }
+      //BMM - this needs to be commented out to match ConstructDialog
+      //if (r.getEffectiveSizeC() > 1) {
+      //  cBegin = (int) gd.getNextNumber() - 1;
+      //  cEnd = (int) gd.getNextNumber() - 1;
+      //  cStep = (float) gd.getNextNumber(); //BMM
+      //}
       if (r.getSizeZ() > 1) {
         zBegin = (int) gd.getNextNumber() - 1;
         zEnd = (int) gd.getNextNumber() - 1;

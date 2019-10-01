@@ -401,19 +401,19 @@ public class ImportProcess implements StatusReporter {
   public int getCCount(int s) {
     assertStep(ImportStep.SERIES);
     if (!options.isSeriesOn(s)) return 0;
-    return Math.round((getCEnd(s) - getCBegin(s) + getCStep(s)) / getCStep(s)); //BMM
+    return Math.round((getCEnd(s) - getCBegin(s) + 1) / getCStep(s)); //BMM
   }
   /** Valid only after {@link ImportStep#SERIES}. */
   public int getZCount(int s) {
     assertStep(ImportStep.SERIES);
     if (!options.isSeriesOn(s)) return 0;
-    return Math.round((getZEnd(s) - getZBegin(s) + getZStep(s)) / getZStep(s)); //BMM
+    return Math.round((getZEnd(s) - getZBegin(s) + 1) / getZStep(s)); //BMM
   }
   /** Valid only after {@link ImportStep#SERIES}. */
   public int getTCount(int s) {
     assertStep(ImportStep.SERIES);
     if (!options.isSeriesOn(s)) return 0;
-    return Math.round((getTEnd(s) - getTBegin(s) + getTStep(s)) / getTStep(s)); //BMM
+    return Math.round((getTEnd(s) - getTBegin(s) + 1) / getTStep(s)); //BMM
   }
 
   /**
